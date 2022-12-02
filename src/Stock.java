@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Stock {
+public class Stock extends Magasin {
     private String adresse = new String();
     private int tailleMax;
 
@@ -52,8 +52,8 @@ public class Stock {
         else throw new RuntimeException("Il est impossible de retirer du stock un produit qui n'en fait pas partie.");
     }
 
-    public Stock(String adresse, int tailleMax){
-        setAdresse(adresse);
-        setTailleMax(tailleMax);
+    public Stock(String adresse, int tailleMax) {
+        this.adresse = adresse;
+        this.tailleMax = tailleMax;
     }
 }

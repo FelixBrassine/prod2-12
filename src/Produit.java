@@ -3,10 +3,7 @@ public class Produit {
     private int prix;
     private String marque;
     private String nom;
-
     private int qttProduit;
-
-
 
     public int getPrix() {
         return prix;
@@ -41,8 +38,6 @@ public class Produit {
     public int getQttProduit() {
         return qttProduit;
     }
-
-
 
     public void setQttProduit(int qttProduit) {
         if(qttProduit>=0) {
