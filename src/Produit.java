@@ -3,7 +3,6 @@ public class Produit {
     private int prix;
     private String marque;
     private String nom;
-    private int qttProduit;
 
     public int getPrix() {
         return prix;
@@ -33,17 +32,6 @@ public class Produit {
         if (nom != null){
             this.nom = nom;
         }
-    }
-
-    public int getQttProduit() {
-        return qttProduit;
-    }
-
-    public void setQttProduit(int qttProduit) {
-        if(qttProduit>=0) {
-            this.qttProduit = qttProduit;
-        }
-        else throw new RuntimeException("Le nombre de produits ne peut être négatif");
     }
 
     public Produit(int prix, String marque, String nom) {
