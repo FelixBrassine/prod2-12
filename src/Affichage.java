@@ -1,15 +1,10 @@
-import java.util.AbstractMap;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Affichage {
 
-
-
     public static void affichageStock (HashMap<String, Produit> listeProduits){
         for (Produit i : listeProduits.values()){
-
             System.out.println("|--------------------------------------------------------|");
             System.out.println("| " + i.getNom() + " > " + i.getMarque() + " > " + i.getPrix()+ "€ | ");
             }
