@@ -1,10 +1,12 @@
 import java.util.HashMap;
 
-public class Stock<P extends Produit> {
+public class Stock {
     private String adresse = new String();
     private int tailleMax;
 
-    private HashMap<String, P> listeProduits;
+    private Class<? extends Produit> type;
+
+    private HashMap<String, Produit> listeProduits = new HashMap<>();
 
     public String getAdresse() {
         return adresse;
@@ -24,41 +26,33 @@ public class Stock<P extends Produit> {
         }
     }
 
-    public HashMap<String, ? extends Produit> getListeProduits() {
+    public HashMap<String, Produit> getListeProduits() {
         return listeProduits;
     }
 
-    private void setListeProduits(String type) {
-        if (type.equals("toxique réfrigéré")){
-            listeProduits = (HashMap<String, P>) new HashMap<String,RefrigereToxique>();
-        }
-        else if (type.equals("toxique")){
-            listeProduits = (HashMap<String, P>) new HashMap<String,Toxique>();
-        }
-        else if (type.equals("réfrigéré")){
-            listeProduits = (HashMap<String, P>) new HashMap<String,Refrigere>();
-        }
-        else{
-            listeProduits = (HashMap<String, P>) new HashMap<String,Produit>();
-        }
-    }
-
-    public void ajouterProduit (P produit){
-        if(!listeProduits.containsValue(produit)) {
+    public void ajouterProduit (Produit produit){
+        if(listeProduits.size()>0) {
+            if (!listeProduits.containsValue(produit)) {
+                if(produit.getClass().equals(type) ) {
+                    listeProduits.put(produit.getNom() + produit.getMarque(), produit);
+                }
+                else throw new RuntimeException("Il est impossible de placer des produits de types différents dans le même stock");
+            }
+            else throw new RuntimeException("Il est impossible d'ajouter un produit déjà existant au stock.");
+        } else {
             listeProduits.put(produit.getNom() + produit.getMarque(), produit);
+            type = produit.getClass();
         }
-        else throw new RuntimeException("Il est impossible d'ajouter un produit déjà existant au stock.");
     }
 
-    public void retirerProduit (P produit){
+    public void retirerProduit (Produit produit){
         if(listeProduits.containsValue(produit)) {
             listeProduits.remove(produit.getNom() + produit.getMarque());
         }
         else throw new RuntimeException("Il est impossible de retirer du stock un produit qui n'en fait pas partie.");
     }
 
-    public Stock(String adresse, int tailleMax, String type){
-        setListeProduits(type);
+    public Stock(String adresse, int tailleMax){
         setAdresse(adresse);
         setTailleMax(tailleMax);
     }
