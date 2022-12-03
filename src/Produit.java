@@ -11,7 +11,7 @@ public abstract class Produit {
         if (prix>0){
             this.prix = prix;
         }
-        else throw new RuntimeException("Le valeure ne peut être négative ou égale à zéro");
+        else throw new NegatifOuZeroException();
     }
     public String getMarque() {
         return marque;
@@ -20,7 +20,7 @@ public abstract class Produit {
         if (marque.length()>0){
             this.marque = marque;
         }
-        else throw new RuntimeException("Il faut au moins 1 caractère");
+        else throw new CaractereVideException();
     }
     public String getNom() {
         return nom;
@@ -29,7 +29,7 @@ public abstract class Produit {
         if (nom.length()>0){
             this.nom = nom;
         }
-        else throw new RuntimeException("Il faut au moins 1 caractère");
+        else throw new CaractereVideException();
     }
 
     public Produit(int prix, String marque, String nom) {

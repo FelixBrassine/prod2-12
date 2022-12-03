@@ -15,7 +15,7 @@ public class Stock <P extends Produit> extends Magasin {
         if (adresse.length()>5){
             this.adresse = adresse;
         }
-        else throw new RuntimeException("Il faut au moins 1 caractère");
+        else throw new CaractereVideException();
     }
     public int getTailleMax() {
         return tailleMax;
@@ -24,7 +24,7 @@ public class Stock <P extends Produit> extends Magasin {
         if(tailleMax>0) {
             this.tailleMax = tailleMax;
         }
-        else throw new RuntimeException("Le valeure ne peut être négative ou égale à zéro");
+        else throw new NegatifOuZeroException();
     }
     public String getNom() {
         return nom;
@@ -33,7 +33,7 @@ public class Stock <P extends Produit> extends Magasin {
         if (nom.length()>0){
             this.nom = nom;
         }
-        else throw new RuntimeException("Il faut au moins 1 caractère pour un nom valide");
+        else throw new CaractereVideException();
     }
     public Integer getQttProduit() {
         return qttProduit;
@@ -42,7 +42,7 @@ public class Stock <P extends Produit> extends Magasin {
         if(qttProduit>0) {
             this.qttProduit = qttProduit;
         }
-        else throw new RuntimeException("Le nombre de produits ne peut être négatif");
+        else throw new NegatifOuZeroException();
     }
     public HashMap<P, Integer> getListeProduits() {
         return new HashMap<>(listeProduits);
