@@ -5,7 +5,6 @@ public class Stock <P extends Produit> extends Magasin {
     private int tailleMax;
     private Integer qttProduit;
     private String nom;
-    private Class<? extends Produit> type;
     private HashMap<P, Integer> listeProduits = new HashMap<>();
 
     //getter-setter
@@ -42,21 +41,20 @@ public class Stock <P extends Produit> extends Magasin {
 
     //Methodes
     public void ajouterProduit (P produit, Integer qttProduit){
-        if(listeProduits.size()>0) {
+        if(listeProduits.size()!=tailleMax){
             if (!listeProduits.containsValue(produit)) {
-                if(produit.getClass().equals(type) ) {
+                if((produit instanceof Refrigere && this.nom.equals("Réfrigéré"))||(produit instanceof Toxique && this.nom.equals("Toxique non réfrigéré"))
+                        ||(produit instanceof RefrigereToxique && this.nom.equals("Toxique réfrigéré"))
+                        ||(produit instanceof ProduitNormal && this.nom.equals("Non-toxique non réfrigéré")))
+                {
                     listeProduits.put(produit, qttProduit);
                 }
                 else throw new RuntimeException("Il est impossible de placer des produits de types différents dans le même stock");
             }
             else throw new RuntimeException("Il est impossible d'ajouter un produit déjà existant au stock.");
         }
-        else if(listeProduits.size()==tailleMax){
-            throw new RuntimeException("Le stock est plein : impossible d'ajouter de nouveaux produits");
-        }
         else {
-            listeProduits.put(produit, qttProduit);
-            type = produit.getClass();
+            throw new RuntimeException("Le stock est plein : impossible d'ajouter de nouveaux produits");
         }
     }
 

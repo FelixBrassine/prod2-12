@@ -1,4 +1,4 @@
-public class Produit {
+public abstract class Produit {
 
     private int prix;
     private String marque;
