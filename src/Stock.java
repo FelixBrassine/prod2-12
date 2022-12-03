@@ -3,33 +3,26 @@ import java.util.HashMap;
 public class Stock <P extends Produit> extends Magasin {
     private String adresse;
     private int tailleMax;
-
     private Integer qttProduit;
-
     private String nom;
-
     private Class<? extends Produit> type;
-
     private HashMap<P, Integer> listeProduits = new HashMap<>();
 
+    //getter-setter
     public String getAdresse() {
         return adresse;
     }
-
     private void setAdresse(String adresse) {
         this.adresse = adresse;
     }
-
     public int getTailleMax() {
         return tailleMax;
     }
-
     private void setTailleMax(int tailleMax) {
         if(tailleMax>0) {
             this.tailleMax = tailleMax;
         }
     }
-
     public Integer getQttProduit() {
         return qttProduit;
     }
@@ -40,19 +33,14 @@ public class Stock <P extends Produit> extends Magasin {
         }
         else throw new RuntimeException("Le nombre de produits ne peut être négatif");
     }
-
     public String getNom() {
         return nom;
     }
-
     public HashMap<P, Integer> getListeProduits() {
         return listeProduits;
     }
 
-    public void setListeProduits(){
-
-    }
-
+    //Methodes
     public void ajouterProduit (P produit, Integer qttProduit){
         if(listeProduits.size()>0) {
             if (!listeProduits.containsValue(produit)) {
@@ -79,6 +67,7 @@ public class Stock <P extends Produit> extends Magasin {
         else throw new RuntimeException("Il est impossible de retirer du stock un produit qui n'en fait pas partie.");
     }
 
+    //constructeur
     public Stock(String adresse, int tailleMax, String nom) {
         this.adresse = adresse;
         this.tailleMax = tailleMax;
