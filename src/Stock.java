@@ -3,16 +3,19 @@ import java.util.HashMap;
 public class Stock <P extends Produit> extends Magasin {
     private String adresse;
     private int tailleMax;
-    private Integer qttProduit;
     private String nom;
-    private HashMap<P, Integer> listeProduits = new HashMap<>();
+    private Integer qttProduit;
+    private final HashMap<P, Integer> listeProduits = new HashMap<>();
 
     //getter-setter
     public String getAdresse() {
         return adresse;
     }
     private void setAdresse(String adresse) {
-        this.adresse = adresse;
+        if (adresse.length()>5){
+            this.adresse = adresse;
+        }
+        else throw new RuntimeException("Il faut au moins 1 caractère");
     }
     public int getTailleMax() {
         return tailleMax;
@@ -21,25 +24,31 @@ public class Stock <P extends Produit> extends Magasin {
         if(tailleMax>0) {
             this.tailleMax = tailleMax;
         }
-    }
-    public Integer getQttProduit() {
-        return qttProduit;
-    }
-
-    public void setQttProduit(Integer qttProduit) {
-        if(qttProduit>=0) {
-            this.qttProduit = qttProduit;
-        }
-        else throw new RuntimeException("Le nombre de produits ne peut être négatif");
+        else throw new RuntimeException("Le valeure ne peut être négative ou égale à zéro");
     }
     public String getNom() {
         return nom;
     }
+    private void setNom(String nom) {
+        if (nom.length()>0){
+            this.nom = nom;
+        }
+        else throw new RuntimeException("Il faut au moins 1 caractère pour un nom valide");
+    }
+    public Integer getQttProduit() {
+        return qttProduit;
+    }
+    private void setQttProduit(Integer qttProduit) {
+        if(qttProduit>0) {
+            this.qttProduit = qttProduit;
+        }
+        else throw new RuntimeException("Le nombre de produits ne peut être négatif");
+    }
     public HashMap<P, Integer> getListeProduits() {
-        return listeProduits;
+        return new HashMap<>(listeProduits);
     }
 
-    //Methodes
+    //Méthodes
     public void ajouterProduit (P produit, Integer qttProduit){
         if(listeProduits.size()!=tailleMax){
             if (!listeProduits.containsValue(produit)) {
@@ -67,8 +76,8 @@ public class Stock <P extends Produit> extends Magasin {
 
     //constructeur
     public Stock(String adresse, int tailleMax, String nom) {
-        this.adresse = adresse;
-        this.tailleMax = tailleMax;
-        this.nom = nom;
+        setAdresse(adresse);
+        setTailleMax(tailleMax);
+        setNom(nom);
     }
 }

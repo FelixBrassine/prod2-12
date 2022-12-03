@@ -4,7 +4,8 @@ import java.util.stream.IntStream;
 public class Magasin {
     private final List<Stock> stockList = new ArrayList<Stock>();
 
-    public static void afficheHashMap(HashMap<Produit,Integer> liste) {
+    //Méthodes
+    private void afficheHashMap(HashMap<Produit,Integer> liste) {
         int i = 0;
         for (Map.Entry<Produit, Integer> entry : liste.entrySet()) {
             Produit key = entry.getKey();
@@ -16,7 +17,7 @@ public class Magasin {
         System.out.println("|-------------------------------------------------------------------------------------------------------|");
     }
 
-    public void affichageListeStock (){
+    private void affichageListeStock (){
         if (stockList.size()>0){
             IntStream.range(0, stockList.size()).forEach(j -> {
                 Stock i = stockList.get(j);
@@ -29,7 +30,7 @@ public class Magasin {
         }
     }
 
-    public void afficherStockArticle (){
+    private void afficherStockArticle (){
         if (stockList.size()>0){
             IntStream.range(0, stockList.size()).forEach(j -> {
                 Stock i = stockList.get(j);
@@ -43,7 +44,7 @@ public class Magasin {
         }
     }
 
-    public int selection() {
+    public void menuPrincipal() {
         int choix = 0;
         boolean quitter = false;
         Scanner sc = new Scanner(System.in);
@@ -60,19 +61,18 @@ public class Magasin {
             if (choix == 6){
                 quitter =true;
             }
-            runShop(choix);
+            selection(choix);
         } while (!quitter);
-        return choix;
     }
 
-    public void ajouterProduitStock (Produit p, int quantiteProd){
+    private void ajouterProduitStock (Produit p, int quantiteProd){
         affichageListeStock();
         Scanner sc = new Scanner(System.in);
         System.out.print("  Dans quel stock voulez-vous l'ajouter ? :");
         int choixStock = Integer.parseInt(sc.nextLine());
         stockList.get(choixStock-1).ajouterProduit(p,quantiteProd);
     }
-    public void runShop(int choix){
+    private void selection(int choix){
         Scanner sc = new Scanner(System.in);
             switch (choix){
                 case 1 :
