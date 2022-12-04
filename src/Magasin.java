@@ -2,16 +2,10 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Magasin {
-    private final List<Stock> stockList = new ArrayList<Stock>();
-    private Scanner sc = new Scanner(System.in);
+    private final List<Stock> stockList = new ArrayList<>();
+    private final Scanner sc = new Scanner(System.in);
 
-    //Méthodes
-    private void ajouterProduitStock (Produit p, int quantiteProd){
-        affichageListeStock();
-        System.out.print("  Dans quel stock voulez-vous l'ajouter ? :");
-        int choixStock = estUnInt(1, stockList.size());
-        stockList.get(choixStock-1).ajouterProduit(p,quantiteProd);
-    }
+    //try-catch
     private int estUnInt (int valeur1, int valeur2){
         boolean valeurOk;
         int element = 0;
@@ -51,6 +45,14 @@ public class Magasin {
         return element;
     }
 
+    //Méthodes
+    private void ajouterProduitStock (Produit p, int quantiteProd){
+        affichageListeStock();
+        System.out.print("  Dans quel stock voulez-vous l'ajouter ? :");
+        int choixStock = estUnInt(1, stockList.size());
+        stockList.get(choixStock-1).ajouterProduit(p,quantiteProd);
+    }
+
     //Affichage
     public void menuPrincipal() {
         int choix = 0;
@@ -76,9 +78,12 @@ public class Magasin {
             case 1 :
                 //créer un stock
                 System.out.print("  Quelle est l'adresse du stock ? : ");
-                String adresse = estUnStringValide(1,2147483647);
+                String adresse = estUnStringValide(1,100);
                 System.out.print("  Quelle est la taille maximum du stock ? : ");
                 int tailleMax = estUnInt(1,2147483647);
+                //quel est le type > 1-2
+                // refirigere 1-2
+                //toxique 1-2
                 System.out.print("  De quel type est le stock ? 1 toxique, 2 non-toxique : ");
                 int type = estUnInt(1,2);
                 switch (type){
@@ -115,13 +120,17 @@ public class Magasin {
             case 2 :
                 //créer-ajouter un article
                 System.out.print("  Quel est le nom de l'article ? : ");
-                String nom = estUnStringValide(1,2147483647);
+                String nom = estUnStringValide(1,100);
                 System.out.print("  Quelle est la marque de l'article ? : ");
-                String marque = estUnStringValide(1,2147483647);
+                String marque = estUnStringValide(1,100);
                 System.out.print("  Quel est le prix de l'article ? : ");
                 int prix = estUnInt(1,2147483647);
                 System.out.print("  Quelle est la quantité de l'article ? : ");
                 int quantite = estUnInt(1,2147483647);
+
+                //quel est le type > 1-2
+                // refirigere 1-2
+                //toxique 1-2
                 System.out.print("  Quel est le type de l'article ? 1 toxique, 2 non-toxique : ");
                 int typeArticle = estUnInt(1,2);
                 switch (typeArticle){
@@ -130,7 +139,7 @@ public class Magasin {
                         int toxiqueRefrigere = estUnInt(1,2);
                         if (toxiqueRefrigere == 1){
                             System.out.print("  Quelle est la température de conservation ? : ");
-                            int tempConservation = estUnInt(-273,57);
+                            int tempConservation = estUnInt(-273,2147483647);
                             RefrigereToxique rt = new RefrigereToxique(prix, marque, nom, tempConservation);
                             ajouterProduitStock(rt,quantite);
                         }else{
@@ -143,7 +152,7 @@ public class Magasin {
                         int noToxiqueRefrigere = estUnInt(1,2);
                         if (noToxiqueRefrigere == 1){
                             System.out.print("  Quelle est la température de conservation ? : ");
-                            int tempConservation = estUnInt(-273,57);
+                            int tempConservation = estUnInt(-273,2147483647);
                             Refrigere r = new Refrigere(prix, marque,nom, tempConservation);
                             ajouterProduitStock(r,quantite);
                         }else{
@@ -169,7 +178,7 @@ public class Magasin {
                 System.out.print("  Quel marque d'article voulez vous modifier ? :");
                 String marqueModif = estUnStringValide(1,100);
                 System.out.print("  Quelle est la nouvelle quantité ? :");
-                Integer quantiteModif = estUnInt(0,2147483647);
+                Integer quantiteModif = estUnInt(1,2147483647);
                 stockList.get(choixStockArticle-1).modifierProduit(nomModif,marqueModif, quantiteModif);
                 break;
             case 5 :

@@ -5,7 +5,6 @@ public class Stock <P extends Produit> extends Magasin {
     private final String adresse;
     private final int tailleMax;
     private final String nom;
-    private Integer qttProduit;
     private final HashMap<P, Integer> listeProduits = new HashMap<>();
 
     //getter-setter
@@ -18,14 +17,8 @@ public class Stock <P extends Produit> extends Magasin {
     public String getNom() {
         return nom;
     }
-    public Integer getQttProduit() {
-        return qttProduit;
-    }
     public HashMap<P, Integer> getListeProduits() {
         return new HashMap<>(listeProduits);
-    }
-    private void setQttProduit(Integer qttProduit) {
-        this.qttProduit = qttProduit;
     }
 
     //Méthodes
@@ -48,22 +41,20 @@ public class Stock <P extends Produit> extends Magasin {
     }
 
     public void retirerProduit (String nom, String marque){
-        for (Map.Entry<P, Integer> entry : getListeProduits().entrySet()) {
-            Produit key = entry.getKey();
+        getListeProduits().forEach((key1, value) -> {
+            Produit key = key1;
             if (key.getNom().equals(nom) && key.getMarque().equals(marque)) {
                 listeProduits.remove(key);
             }
-        }
+        });
     }
 
     public void modifierProduit (String nom, String marque, Integer quantite){
-        for (Map.Entry<P, Integer> entry : getListeProduits().entrySet()) {
-            P key = entry.getKey();
-            Integer value = entry.getValue();
+        getListeProduits().forEach((key, value) -> {
             if (key.getNom().equals(nom) && key.getMarque().equals(marque)) {
-                listeProduits.replace(key,quantite);
+                listeProduits.replace(key, quantite);
             }
-        }
+        });
     }
 
     //constructeur
