@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Stock <P extends Produit> extends Magasin {
     private final String adresse;
@@ -23,6 +24,9 @@ public class Stock <P extends Produit> extends Magasin {
     public HashMap<P, Integer> getListeProduits() {
         return new HashMap<>(listeProduits);
     }
+    private void setQttProduit(Integer qttProduit) {
+        this.qttProduit = qttProduit;
+    }
 
     //Méthodes
     public void ajouterProduit (P produit, Integer qttProduit){
@@ -43,11 +47,23 @@ public class Stock <P extends Produit> extends Magasin {
         }
     }
 
-    public void retirerProduit (P produit){
-        if(listeProduits.containsValue(produit)) {
-            listeProduits.remove(produit.getNom() + produit.getMarque());
+    public void retirerProduit (String nom, String marque){
+        for (Map.Entry<P, Integer> entry : getListeProduits().entrySet()) {
+            Produit key = entry.getKey();
+            if (key.getNom().equals(nom) && key.getMarque().equals(marque)) {
+                listeProduits.remove(key);
+            }
         }
-        else throw new RuntimeException("Il est impossible de retirer du stock un produit qui n'en fait pas partie.");
+    }
+
+    public void modifierProduit (String nom, String marque, Integer quantite){
+        for (Map.Entry<P, Integer> entry : getListeProduits().entrySet()) {
+            P key = entry.getKey();
+            Integer value = entry.getValue();
+            if (key.getNom().equals(nom) && key.getMarque().equals(marque)) {
+                listeProduits.replace(key,quantite);
+            }
+        }
     }
 
     //constructeur

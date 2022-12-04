@@ -31,7 +31,7 @@ public class Magasin {
         }while (!valeurOk);
         return element;
     }
-    public String estUnStringValide  (int valeur1, int valeur2){
+    private String estUnStringValide  (int valeur1, int valeur2){
         boolean valeurOk;
         String element = null;
         do{
@@ -49,7 +49,6 @@ public class Magasin {
             }
         }while (!valeurOk);
         return element;
-
     }
 
     //Affichage
@@ -165,10 +164,13 @@ public class Magasin {
                 System.out.print("  Dans quel stock se trouve l'article ? :");
                 int choixStockArticle = estUnInt(1,stockList.size());
                 afficheHashMap(stockList.get(choixStockArticle-1).getListeProduits());
-                System.out.print("  Quel article voulez vous modifier ? :");
-                int choixArticle = estUnInt(1,stockList.get(choixStockArticle-1).getListeProduits().size());
-                //ajouter modif a ce stock
-//                    stockList.get(choixStockArticle-1).getListeProduits().
+                System.out.print("  Quel nom d'article voulez vous modifier ? :");
+                String nomModif = estUnStringValide(1,100);
+                System.out.print("  Quel marque d'article voulez vous modifier ? :");
+                String marqueModif = estUnStringValide(1,100);
+                System.out.print("  Quelle est la nouvelle quantité ? :");
+                Integer quantiteModif = estUnInt(0,2147483647);
+                stockList.get(choixStockArticle-1).modifierProduit(nomModif,marqueModif, quantiteModif);
                 break;
             case 5 :
                 //supprimer un article
@@ -176,10 +178,11 @@ public class Magasin {
                 System.out.print("  Dans quel stock se trouve l'article ? :");
                 int choixStockSupp = estUnInt(1,stockList.size());
                 afficheHashMap(stockList.get(choixStockSupp-1).getListeProduits());
-                System.out.print("  Quel article voulez vous supprimer ? :");
-                int choixSupp = estUnInt(1,stockList.get(choixStockSupp-1).getListeProduits().size());
-                //ajouter supp a ce stok
-//                    stockList.get(choixStockArticle-1).getListeProduits().
+                System.out.print("  Quel nom d'article voulez vous supprimer ? :");
+                String nomSupp = estUnStringValide(1,100);
+                System.out.print("  Quel marque d'article voulez vous supprimer ? :");
+                String marqueSupp = estUnStringValide(1,100);
+                stockList.get(choixStockSupp-1).retirerProduit(nomSupp, marqueSupp);
                 break;
             case  6:
                 System.exit(0);

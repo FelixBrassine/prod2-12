@@ -7,8 +7,5 @@ public class Main {
         Magasin miniMarket = new Magasin();
         miniMarket.menuPrincipal();
 
-        RefrigereToxique r = new RefrigereToxique(5,"ldfdsfs","sfsf",5);
-        Stock<Refrigere> t = new Stock<>("gffg",50,"dgqfsgg");
-        t.ajouterProduit(r, 20);
     }
 }
