@@ -21,7 +21,7 @@ public class Magasin {
                 if (element>=valeur1 && element<=valeur2){
                     valeurOk = true;
                 }else{
-                    System.out.println("\u001b[31m    Le chiffre dois être comprit entre " + valeur1 + " et " + valeur2 + "\u001b[0m");
+                    System.out.println("\u001b[31m    Le chiffre doit être compris entre " + (valeur1+1) + " et " + valeur2 + "\u001b[0m");
                     valeurOk = false;
                 }
             }catch (NumberFormatException ex){
@@ -40,7 +40,7 @@ public class Magasin {
                 if (element.length() > valeur1 && element.length() <= valeur2){
                     valeurOk = true;
                 }else{
-                    System.out.println("\u001b[31m    Il faut entre " + valeur1 + " et " + valeur2 + " caractères !\u001b[0m");
+                    System.out.println("\u001b[31m    Il faut entre " + (valeur1+1) + " et " + valeur2 + " caractères !\u001b[0m");
                     valeurOk = false;
                 }
             }catch (NumberFormatException ex){
@@ -65,7 +65,6 @@ public class Magasin {
             System.out.println("5 pour retirer un article");
             System.out.println("6 pour fermer le programme");
             System.out.print("Votre séléction : ");
-//            choix = Integer.parseInt(sc.nextLine());
             choix = estUnInt(1,7);
             if (choix == 6){
                 quitter =true;
@@ -77,9 +76,9 @@ public class Magasin {
         switch (choix){
             case 1 :
                 //créer un stock
-                System.out.print("  Quel est l'adresse du stock ? : ");
+                System.out.print("  Quelle est l'adresse du stock ? : ");
                 String adresse = estUnStringValide(1,2147483647);
-                System.out.print("  Quel est la taille maximum du stock ? : ");
+                System.out.print("  Quelle est la taille maximum du stock ? : ");
                 int tailleMax = estUnInt(1,2147483647);
                 System.out.print("  De quel type est le stock ? 1 toxique, 2 non-toxique : ");
                 int type = estUnInt(1,2);
@@ -89,11 +88,11 @@ public class Magasin {
                         int toxiqueRefrigere = estUnInt(1,2);
                         if (toxiqueRefrigere == 1){
                             String toxiqueRefrigereType = "Toxique réfrigéré";
-                            Stock stockToxiqueRefrigere = new Stock<RefrigereToxique>(adresse, tailleMax, toxiqueRefrigereType);
+                            Stock <RefrigereToxique> stockToxiqueRefrigere = new Stock<>(adresse, tailleMax, toxiqueRefrigereType);
                             stockList.add(stockToxiqueRefrigere);
                         }else{
                             String toxiqueNoRefrigereType = "Toxique non réfrigéré";
-                            Stock stockToxiqueNoRefrigere = new Stock<Toxique>(adresse, tailleMax, toxiqueNoRefrigereType);
+                            Stock <Toxique> stockToxiqueNoRefrigere = new Stock<>(adresse, tailleMax, toxiqueNoRefrigereType);
                             stockList.add(stockToxiqueNoRefrigere);
                         }
                         break;
@@ -102,11 +101,11 @@ public class Magasin {
                         int noToxiqueRefrigere = estUnInt(1,2);
                         if (noToxiqueRefrigere == 1){
                             String refrigereType = "Réfrigéré";
-                            Stock stock3 = new Stock<Refrigere>(adresse, tailleMax, refrigereType);
+                            Stock <Refrigere> stock3 = new Stock(adresse, tailleMax, refrigereType);
                             stockList.add(stock3);
                         }else{
                             String noToxiqueRefrigereType = "Non-toxique non réfrigéré";
-                            Stock stockNoToxNoRefrigere = new Stock<ProduitNormal>(adresse, tailleMax, noToxiqueRefrigereType);
+                            Stock <ProduitNormal> stockNoToxNoRefrigere = new Stock(adresse, tailleMax, noToxiqueRefrigereType);
                             stockList.add(stockNoToxNoRefrigere);
                         }
                         break;
@@ -118,11 +117,11 @@ public class Magasin {
                 //créer-ajouter un article
                 System.out.print("  Quel est le nom de l'article ? : ");
                 String nom = estUnStringValide(1,2147483647);
-                System.out.print("  Quel est la marque de l'article ? : ");
+                System.out.print("  Quelle est la marque de l'article ? : ");
                 String marque = estUnStringValide(1,2147483647);
                 System.out.print("  Quel est le prix de l'article ? : ");
                 int prix = estUnInt(1,2147483647);
-                System.out.print("  Quel est la quantité de l'article ? : ");
+                System.out.print("  Quelle est la quantité de l'article ? : ");
                 int quantite = estUnInt(1,2147483647);
                 System.out.print("  Quel est le type de l'article ? 1 toxique, 2 non-toxique : ");
                 int typeArticle = estUnInt(1,2);
@@ -131,7 +130,7 @@ public class Magasin {
                         System.out.print("  Est-ce un article réfrigéré ? 1 oui 2 non : ");
                         int toxiqueRefrigere = estUnInt(1,2);
                         if (toxiqueRefrigere == 1){
-                            System.out.print("  Quel est la température de conservation ? : ");
+                            System.out.print("  Quelle est la température de conservation ? : ");
                             int tempConservation = estUnInt(-273,57);
                             RefrigereToxique rt = new RefrigereToxique(prix, marque, nom, tempConservation);
                             ajouterProduitStock(rt,quantite);
@@ -144,7 +143,7 @@ public class Magasin {
                         System.out.print("  Est-ce un article réfrigéré ? 1 oui 2 non : ");
                         int noToxiqueRefrigere = estUnInt(1,2);
                         if (noToxiqueRefrigere == 1){
-                            System.out.print("  Quel est la température de conservation ? : ");
+                            System.out.print("  Quelle est la température de conservation ? : ");
                             int tempConservation = estUnInt(-273,57);
                             Refrigere r = new Refrigere(prix, marque,nom, tempConservation);
                             ajouterProduitStock(r,quantite);

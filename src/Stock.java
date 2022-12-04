@@ -43,7 +43,7 @@ public class Stock <P extends Produit> extends Magasin {
         }
     }
 
-    public void retirerProduit (HashMap listeProduits, P produit){
+    public void retirerProduit (P produit){
         if(listeProduits.containsValue(produit)) {
             listeProduits.remove(produit.getNom() + produit.getMarque());
         }
