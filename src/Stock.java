@@ -1,9 +1,9 @@
 import java.util.HashMap;
 
 public class Stock <P extends Produit> extends Magasin {
-    private String adresse;
-    private int tailleMax;
-    private String nom;
+    private final String adresse;
+    private final int tailleMax;
+    private final String nom;
     private Integer qttProduit;
     private final HashMap<P, Integer> listeProduits = new HashMap<>();
 
@@ -11,38 +11,14 @@ public class Stock <P extends Produit> extends Magasin {
     public String getAdresse() {
         return adresse;
     }
-    private void setAdresse(String adresse) {
-        if (adresse.length()>5){
-            this.adresse = adresse;
-        }
-        else throw new CaractereVideException();
-    }
     public int getTailleMax() {
         return tailleMax;
-    }
-    private void setTailleMax(int tailleMax) {
-        if(tailleMax>0) {
-            this.tailleMax = tailleMax;
-        }
-        else throw new NegatifOuZeroException();
     }
     public String getNom() {
         return nom;
     }
-    private void setNom(String nom) {
-        if (nom.length()>0){
-            this.nom = nom;
-        }
-        else throw new CaractereVideException();
-    }
     public Integer getQttProduit() {
         return qttProduit;
-    }
-    private void setQttProduit(Integer qttProduit) {
-        if(qttProduit>0) {
-            this.qttProduit = qttProduit;
-        }
-        else throw new NegatifOuZeroException();
     }
     public HashMap<P, Integer> getListeProduits() {
         return new HashMap<>(listeProduits);
@@ -67,7 +43,7 @@ public class Stock <P extends Produit> extends Magasin {
         }
     }
 
-    public void retirerProduit (P produit){
+    public void retirerProduit (HashMap listeProduits, P produit){
         if(listeProduits.containsValue(produit)) {
             listeProduits.remove(produit.getNom() + produit.getMarque());
         }
@@ -76,8 +52,8 @@ public class Stock <P extends Produit> extends Magasin {
 
     //constructeur
     public Stock(String adresse, int tailleMax, String nom) {
-        setAdresse(adresse);
-        setTailleMax(tailleMax);
-        setNom(nom);
+        this.adresse = adresse;
+        this.tailleMax = tailleMax;
+        this.nom = nom;
     }
 }
